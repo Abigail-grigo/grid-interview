@@ -1,22 +1,25 @@
 import React from 'react';
 
 const Grid = ({ config, data }) => (
+
   <table>
     <thead>
-    <tr>
-      <th>Col 1</th>
-      <th>Col 2</th>
-    </tr>
+      <tr>
+        {config.map((item, index) => {
+          return <td key={index}>{item.title}</td>
+        })}
+      </tr>
     </thead>
     <tbody>
-    <tr>
-      <td>Data 1</td>
-      <td>Data 2</td>
-    </tr>
-    <tr>
-      <td>Data 1</td>
-      <td>Data 2</td>
-    </tr>
+      {data.map((dItem, dIndex) => {
+        {
+          return <tr key={dIndex}>
+            {config.map((cItem, cIndex) => {
+              return <td key={cIndex}> {cItem.component ? cItem.component({data:dItem[cItem.field]}) : dItem[cItem.field]}</td>
+            })}
+          </tr>
+        }
+      })}
     </tbody>
   </table>
 );
